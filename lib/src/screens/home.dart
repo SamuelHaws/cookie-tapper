@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/counter.dart';
+import '../state_provider.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -21,16 +21,16 @@ class Home extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Consumer<Counter>(
-              builder: (context, counter, child) => Text('${counter.value}'),
+            Consumer<StateProvider>(
+              builder: (context, provider, child) =>
+                  Text('${provider.cookieCount}'),
             ),
             RaisedButton(
               child: Text('Push me!'),
               onPressed: () {
-                // Navigate to the second screen when tapped.
-                var count = Provider.of<Counter>(context, listen: false);
-
-                count.increment();
+                var provider =
+                    Provider.of<StateProvider>(context, listen: false);
+                provider.increment();
               },
             ),
           ],
