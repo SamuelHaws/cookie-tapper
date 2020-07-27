@@ -11,7 +11,7 @@ class Store extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.group_work),
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/');
             },
           ),
         ],

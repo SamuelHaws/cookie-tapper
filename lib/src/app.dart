@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import './models/counter.dart';
 import './screens/home.dart';
 import './screens/store.dart';
 
@@ -12,14 +13,5 @@ class App extends StatelessWidget {
         '/store': (context) => Store(),
       }),
     );
-  }
-}
-
-class Counter with ChangeNotifier {
-  int value = 0;
-
-  void increment() {
-    value += 1;
-    notifyListeners();
   }
 }
