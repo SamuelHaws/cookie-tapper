@@ -10,7 +10,10 @@ class Store extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Store'),
+          title: Consumer<StateProvider>(
+            builder: (context, provider, child) =>
+                Text('Store (${provider.cookieCount} cookies)'),
+          ),
           actions: <Widget>[
             // action button
             Padding(
@@ -96,19 +99,31 @@ class Store extends StatelessWidget {
               ),
             ],
           ),
+          Consumer<StateProvider>(
+            builder: (context, provider, child) =>
+                Text('+ ${provider.cookieCount} cookies per second'),
+          ),
         ],
       ),
     );
   }
 
   Widget buildAutoClickerTile(String type, BuildContext context) {
+    var provider = Provider.of<StateProvider>(context, listen: false);
+
     return Ink(
-      color: Colors.grey[200],
+      color: Colors.orange[100],
       child: ListTile(
-        title: Text(type),
+        title: Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(type + ': '),
+            Text(provider.availableAutoClickers[type].cost.toString()),
+          ],
+        ),
         onTap: () {
           print('auto clicker buy tile tapped with type: ' + type);
-          var provider = Provider.of<StateProvider>(context, listen: false);
           provider.purchaseAutoClicker(type);
         },
       ),

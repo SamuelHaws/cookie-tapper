@@ -6,22 +6,19 @@ class StateProvider with ChangeNotifier {
   Timer timer;
 
   int cookieCount = 0;
-  int autoClicksPerSec = 1;
+  int autoClicksPerSec = 0;
   int cookiesPerManualClick = 1;
-  List<AutoClicker> autoClickers;
-  List<AutoClicker> availableAutoClickers = [];
+  final Map<String, AutoClicker> availableAutoClickers = {
+    'Grandma': AutoClicker('Grandma', 5, 20),
+    'Farm': AutoClicker('Farm', 8, 50),
+  };
   final Map<String, int> clickersOwned = {
     'Grandma': 0,
     'Farm': 0,
   };
-  final Map<String, int> clickerCosts = {
-    'Grandma': 20,
-    'Farm': 50,
-  };
 
   StateProvider() {
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) => autoClick());
-    autoClickers = [];
   }
 
   void autoClick() {
@@ -35,7 +32,10 @@ class StateProvider with ChangeNotifier {
   }
 
   void purchaseAutoClicker(String autoClickerType) {
+    if (cookieCount < availableAutoClickers[autoClickerType].cost) return;
     clickersOwned[autoClickerType] += 1;
+    autoClicksPerSec += availableAutoClickers[autoClickerType].clickRate;
+    cookieCount -= availableAutoClickers[autoClickerType].cost;
     notifyListeners();
   }
 

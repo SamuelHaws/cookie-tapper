@@ -8,10 +8,16 @@ class App extends StatelessWidget {
   Widget build(context) {
     return ChangeNotifierProvider(
       create: (context) => StateProvider(),
-      child: MaterialApp(initialRoute: '/', routes: {
-        '/': (context) => Home(),
-        '/store': (context) => Store(),
-      }),
+      child: MaterialApp(
+          theme: ThemeData(
+            primaryColor: Colors.brown[800],
+            scaffoldBackgroundColor: Colors.orange[200],
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => Home(),
+            '/store': (context) => Store(),
+          }),
     );
   }
 }

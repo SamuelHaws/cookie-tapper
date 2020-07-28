@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
           children: <Widget>[
             Consumer<StateProvider>(
               builder: (context, provider, child) =>
-                  Text('${provider.cookieCount}'),
+                  Text('Cookies: ${provider.cookieCount}'),
             ),
             RaisedButton(
               child: Text('Push me!'),
