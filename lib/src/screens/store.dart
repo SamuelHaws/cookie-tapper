@@ -15,7 +15,6 @@ class Store extends StatelessWidget {
                 Text('Store (${provider.cookieCount} cookies)'),
           ),
           actions: <Widget>[
-            // action button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: IconButton(
@@ -101,7 +100,7 @@ class Store extends StatelessWidget {
           ),
           Consumer<StateProvider>(
             builder: (context, provider, child) =>
-                Text('+ ${provider.cookieCount} cookies per second'),
+                Text('+ ${provider.autoClicksPerSec} cookies per second'),
           ),
         ],
       ),
