@@ -7,14 +7,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Screen'),
+        title: Text('Tap Screen'),
         actions: <Widget>[
           // action button
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.pushNamed(context, '/store');
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/store');
+              },
+            ),
           ),
         ],
       ),
@@ -30,7 +33,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 var provider =
                     Provider.of<StateProvider>(context, listen: false);
-                provider.increment();
+                provider.manualClick();
               },
             ),
           ],
