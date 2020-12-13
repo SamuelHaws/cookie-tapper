@@ -108,17 +108,21 @@ class Store extends StatelessWidget {
   }
 
   Widget buildAutoClickerTile(String type, BuildContext context) {
-    var provider = Provider.of<StateProvider>(context, listen: false);
+    var provider = Provider.of<StateProvider>(context);
 
     return Ink(
       color: Colors.orange[100],
       child: ListTile(
+        enabled:
+            provider.cookieCount >= provider.availableAutoClickers[type].cost,
         title: Flex(
           direction: Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(type + ': '),
-            Text(provider.availableAutoClickers[type].cost.toString()),
+            Text('Cost: ' +
+                provider.availableAutoClickers[type].cost.toString() +
+                ' cookies'),
           ],
         ),
         onTap: () {
